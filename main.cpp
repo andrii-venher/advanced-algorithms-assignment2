@@ -1,6 +1,6 @@
-#include <iostream>
+#include "AuntsNamesday.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    AuntsNamesday::test();
     return 0;
 }
