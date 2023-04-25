@@ -2,9 +2,29 @@
 #define ADVANCED_ALGORITHMS_ASSIGNMENT2_HASHMAP_H
 
 #include <string>
+#include <limits>
 
 // string - string hash map interface
 class HashMap {
+protected:
+    static int hash(const std::string &data, int bucket_size) {
+        int index = 0;
+        int factor = 31;
+
+        for (const char &i: data) {
+
+            index = ((index % bucket_size)
+                     + (((int) i) * factor) % bucket_size)
+                    % bucket_size;
+
+            factor = ((factor % std::numeric_limits<int>::max())
+                      * (31 % std::numeric_limits<int>::max()))
+                     % std::numeric_limits<int>::max();
+        }
+
+        return index;
+    }
+
 public:
     virtual bool contains(std::string key) const = 0;
 
