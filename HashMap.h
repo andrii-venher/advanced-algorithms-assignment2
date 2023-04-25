@@ -8,22 +8,6 @@
 // string - string hash map interface
 class HashMap {
 protected:
-    class Node {
-        std::string _key;
-        std::string _value;
-        Node *_next;
-    public:
-        Node(std::string key, std::string value, Node *next) : _key(std::move(key)), _value(std::move(value)), _next(next) {}
-
-        std::string get_key() const { return _key; }
-
-        std::string get_value() const { return _value; }
-
-        Node *get_next() const { return _next; }
-
-        void set_next(Node *next) { _next = next; }
-    };
-
     static int hash(const std::string &data, int bucket_size) {
         int index = 0;
         int factor = 31;
@@ -57,6 +41,22 @@ public:
 };
 
 class SeparateChainingHashMap : public HashMap {
+    class Node {
+        std::string _key;
+        std::string _value;
+        Node *_next;
+    public:
+        Node(std::string key, std::string value, Node *next) : _key(std::move(key)), _value(std::move(value)), _next(next) {}
+
+        std::string get_key() const { return _key; }
+
+        std::string get_value() const { return _value; }
+
+        Node *get_next() const { return _next; }
+
+        void set_next(Node *next) { _next = next; }
+    };
+
 public:
     bool contains(std::string key) const override;
 
