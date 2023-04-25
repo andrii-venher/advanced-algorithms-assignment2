@@ -40,7 +40,7 @@ public:
 
         std::string text;
         std::ofstream file_out;
-        file_out.open("text.txt");
+        file_out.open(get_output_file_name());
 
         for (int i = 0; i < text_size; ++i) {
             if (dist_spelling(rng) <= 75) {
@@ -52,6 +52,8 @@ public:
             }
         }
     }
+
+    static std::string get_output_file_name() { return "text.txt"; }
 };
 
 class SpellCheckingAlgorithm {
@@ -96,7 +98,7 @@ private:
 
 public:
     std::string getName() override {
-        return "Naive: ";
+        return "Naive";
     }
 
     void buildDictionary() {
@@ -133,7 +135,7 @@ public:
                 ++wrongSpelledWords;
             }
         }
-        std::cout << getName() << wrongSpelledWords << std::endl;
+        std::cout << getName() << ": " << wrongSpelledWords << std::endl;
 
         return wrongSpelledWords;
     }
@@ -146,6 +148,23 @@ public:
             delete destroy;
             destroy = tmp;
         }
+    }
+};
+
+
+class MeSpellRite {
+public:
+    static void test() {
+        TextBuilder::buildText();
+
+        std::cout << "------ Me Spell Rite ------" << std::endl << std::endl;
+
+        std::vector<SpellCheckingAlgorithm *> spellCheckers = {new NaiveSpellCheckingAlgorithm()};
+        for (const auto &spellChecker: spellCheckers) {
+            spellChecker->spellCheck(TextBuilder::get_output_file_name());
+        }
+
+        std::cout << std::endl;
     }
 };
 

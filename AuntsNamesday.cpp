@@ -111,13 +111,13 @@ void AuntsNamesday::test() {
         return;
     }
 
-    std::cout << "------ Table 1 ------" << std::endl;
+    std::cout << "---- Table 1 ----" << std::endl;
     for (const auto &guest: table1) {
         std::cout << guest << std::endl;
     }
     std::cout << std::endl;
 
-    std::cout << "------ Table 2 ------" << std::endl;
+    std::cout << "---- Table 2 ----" << std::endl;
     for (const auto &guest: table2) {
         std::cout << guest << std::endl;
     }
