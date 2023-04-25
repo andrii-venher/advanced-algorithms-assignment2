@@ -2,6 +2,7 @@
 #define ADVANCED_ALGORITHMS_ASSIGNMENT2_HASHMAPASSERTS_H
 
 #include "HashMap.h"
+#include <iostream>
 
 class HashMapAsserts {
     static float get_bucket_size() { return 100; }
@@ -48,12 +49,16 @@ class HashMapAsserts {
 
 public:
     static void run() {
+        std::cout << "Hash map asserts started." << std::endl;
+
         std::vector<HashMap *> hash_maps{new SeparateChainingHashMap((int) get_bucket_size())};
 
         for (const auto &hash_map: hash_maps) {
             run_one(hash_map);
             delete hash_map;
         }
+
+        std::cout << "Hash map asserts passed." << std::endl;
     }
 };
 

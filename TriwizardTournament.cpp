@@ -168,5 +168,6 @@ void TriwizardTournament::test() {
     float fastest_wizard_path;
     std::tie(fastest_wizard_id, fastest_wizard_path) = find_fastest_wizard(labyrinth, wizards);
 
-    std::cout << "The fastest wizard is [" << fastest_wizard_id << "] whose path is " << std::fixed << std::setprecision(2) << fastest_wizard_path << std::endl;
+    std::cout << "The fastest wizard is [" << fastest_wizard_id << "] whose path is " << std::fixed << std::setprecision(2) << fastest_wizard_path << std::endl
+              << std::endl;
 }
