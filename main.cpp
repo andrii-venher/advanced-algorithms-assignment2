@@ -1,7 +1,6 @@
 #include "TriwizardTournament.h"
 #include "AuntsNamesday.h"
 #include "MeSpellRite.h"
-#include <vector>
 
 int main() {
     MeSpellRite::test();

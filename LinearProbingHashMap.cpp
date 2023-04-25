@@ -12,14 +12,7 @@ void LinearProbingHashMap::put(std::string key, std::string value) {
 
 }
 
-void LinearProbingHashMap::erase(std::string key, std::string value) {
+void LinearProbingHashMap::erase(std::string key) {
 
 }
 
-int LinearProbingHashMap::size() const {
-    return 0;
-}
-
-float LinearProbingHashMap::load_factor() const {
-    return 0;
-}

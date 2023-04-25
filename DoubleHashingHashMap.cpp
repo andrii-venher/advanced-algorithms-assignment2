@@ -12,14 +12,6 @@ void DoubleHashingHashMap::put(std::string key, std::string value) {
 
 }
 
-void DoubleHashingHashMap::erase(std::string key, std::string value) {
+void DoubleHashingHashMap::erase(std::string key) {
 
-}
-
-int DoubleHashingHashMap::size() const {
-    return 0;
-}
-
-float DoubleHashingHashMap::load_factor() const {
-    return 0;
 }
