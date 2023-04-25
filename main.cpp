@@ -12,5 +12,8 @@ int main() {
     }
 
     AuntsNamesday::test();
+
+    TriwizardTournament::test();
+
     return 0;
 }
