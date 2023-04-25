@@ -9,7 +9,7 @@
 #include <iostream>
 #include <set>
 
-const int dict_size = 10000;
+const int dict_size = 1000;
 const int text_size = 1000;
 
 class TextBuilder {
@@ -25,7 +25,6 @@ public:
             english_words.push_back(tmp);
         }
 
-        english_words.pop_back();
         file_in.close();
 
         return english_words;
@@ -152,11 +151,9 @@ public:
     }
 };
 
-class BBSTSpellCheckingAlgorithm: public SpellCheckingAlgorithm
-{
+class BBSTSpellCheckingAlgorithm : public SpellCheckingAlgorithm {
 private:
-    static std::set<std::string, std::greater<>> buildDictionary()
-    {
+    static std::set<std::string, std::greater<>> buildDictionary() {
         std::vector<std::string> english_words = TextBuilder::getListOfWords();
         std::set<std::string, std::greater<>> dictionary;
 
@@ -168,20 +165,17 @@ private:
     }
 
 public:
-    std::string getName() override
-    {
+    std::string getName() override {
         return "BBST";
     }
 
-    int spellCheck(std::string filename) override
-    {
+    int spellCheck(std::string filename) override {
         int wrongSpelledWords = 0;
         std::set<std::string, std::greater<>> dictionary = buildDictionary();
         std::vector<std::string> text_vector = textFileToVector(filename);
 
         for (const auto &word: text_vector) {
-            if (dictionary.find(word) == dictionary.end())
-            {
+            if (dictionary.find(word) == dictionary.end()) {
                 ++wrongSpelledWords;
             }
         }
@@ -194,6 +188,86 @@ public:
     ~BBSTSpellCheckingAlgorithm() override = default;
 };
 
+class TrieSpellCheckingAlgorithm : public SpellCheckingAlgorithm {
+private:
+    struct TrieNode {
+        struct TrieNode *children[26] = {};
+        bool isEndOfWord = false;
+
+        TrieNode() {
+            for (auto &child: children) {
+                child = nullptr;
+            }
+        }
+    };
+
+    TrieNode *root = new TrieNode();
+
+    void buildDictionary() {
+        std::vector<std::string> english_words = TextBuilder::getListOfWords();
+
+        for (const auto &english_word: english_words) {
+            TrieNode *tmp = root;
+
+            for (char character: english_word) {
+                int index = character - 'a';
+                if (!tmp->children[index])
+                    tmp->children[index] = new TrieNode();
+
+                tmp = tmp->children[index];
+            }
+
+            tmp->isEndOfWord = true;
+        }
+    }
+
+    void clear(TrieNode *node) {
+        for (auto &child: node->children) {
+            if (child) {
+                clear(child);
+            }
+        }
+        delete node;
+    }
+    
+public:
+    std::string getName() override {
+        return "Trie";
+    }
+
+    int spellCheck(std::string filename) override {
+        int wrongSpelledWords = 0;
+        buildDictionary();
+        std::vector<std::string> text_vector = textFileToVector(filename);
+
+        for (const auto &word: text_vector) {
+            TrieNode *tmp = root;
+
+            for (char character: word) {
+                int index = character - 'a';
+                if (!tmp->children[index]) {
+                    ++wrongSpelledWords;
+                    break;
+                }
+
+                tmp = tmp->children[index];
+            }
+
+            if (!tmp->isEndOfWord) {
+                ++wrongSpelledWords;
+            }
+        }
+
+        std::cout << getName() << ": " << wrongSpelledWords << std::endl;
+
+        return wrongSpelledWords;
+    }
+
+    ~TrieSpellCheckingAlgorithm() override {
+        clear(root);
+    }
+};
+
 
 class MeSpellRite {
 public:
@@ -202,7 +276,9 @@ public:
 
         std::cout << "------ Me Spell Rite ------" << std::endl << std::endl;
 
-        std::vector<SpellCheckingAlgorithm *> spellCheckers = {new NaiveSpellCheckingAlgorithm(), new BBSTSpellCheckingAlgorithm()};
+        std::vector<SpellCheckingAlgorithm *> spellCheckers = {new NaiveSpellCheckingAlgorithm(),
+                                                               new BBSTSpellCheckingAlgorithm(),
+                                                               new TrieSpellCheckingAlgorithm()};
         for (const auto &spellChecker: spellCheckers) {
             spellChecker->spellCheck(TextBuilder::get_output_file_name());
         }
