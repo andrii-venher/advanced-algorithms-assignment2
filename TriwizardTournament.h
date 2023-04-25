@@ -19,7 +19,7 @@ class TriwizardTournament {
         Wizard(int id, std::pair<int, int> initial_position, int speed) : id(id), initial_position(std::move(initial_position)), speed(speed) {}
     };
 
-    static int find_fastest_wizard(const std::vector<std::vector<LabyrinthObject>> &labyrinth, const std::vector<Wizard> &wizards);
+    static std::tuple<int, float> find_fastest_wizard(const std::vector<std::vector<LabyrinthObject>> &labyrinth, const std::vector<Wizard> &wizards);
 
     static std::vector<std::vector<LabyrinthObject>> get_labyrinth_from_file(std::string file_name);
 

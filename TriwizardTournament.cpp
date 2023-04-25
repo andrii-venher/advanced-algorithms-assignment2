@@ -5,7 +5,7 @@
 #include <fstream>
 
 
-int
+std::tuple<int, float>
 TriwizardTournament::find_fastest_wizard(const std::vector<std::vector<LabyrinthObject>> &labyrinth, const std::vector<Wizard> &wizards) {
     // Assume labyrinth is a rectangle
     int height = labyrinth.size();
@@ -78,7 +78,7 @@ TriwizardTournament::find_fastest_wizard(const std::vector<std::vector<Labyrinth
         }
     }
 
-    return min_path_wizard_id;
+    return {min_path_wizard_id, min_path};
 }
 
 std::vector<std::vector<TriwizardTournament::LabyrinthObject>> TriwizardTournament::get_labyrinth_from_file(std::string file_name) {
@@ -102,12 +102,13 @@ std::vector<std::vector<TriwizardTournament::LabyrinthObject>> TriwizardTourname
     return labyrinth;
 }
 
-std::vector<std::vector<TriwizardTournament::LabyrinthObject>> TriwizardTournament::get_labyrinth_from_char_matrix(std::vector<std::vector<char>> labyrinth_as_char_matrix) {
+std::vector<std::vector<TriwizardTournament::LabyrinthObject>>
+TriwizardTournament::get_labyrinth_from_char_matrix(std::vector<std::vector<char>> labyrinth_as_char_matrix) {
     std::vector<std::vector<LabyrinthObject>> labyrinth;
 
-    for (const auto& row : labyrinth_as_char_matrix) {
+    for (const auto &row: labyrinth_as_char_matrix) {
         std::vector<LabyrinthObject> mapped_row;
-        for (const auto& c : row) {
+        for (const auto &c: row) {
             if (c == '#') {
                 mapped_row.push_back(Wall);
             } else {
@@ -126,22 +127,21 @@ void TriwizardTournament::test() {
 
 //    std::vector<std::vector<LabyrinthObject>> labyrinth = get_labyrinth_from_file("labyrinth.txt");
     std::vector<std::vector<LabyrinthObject>> labyrinth = get_labyrinth_from_char_matrix({
-        { ' ', ' ', '#', ' ', ' ', '#', },
-        { '#', ' ', ' ', ' ', ' ', ' ', },
-        { '#', '#', ' ', ' ', '#', ' ', },
-        { ' ', ' ', ' ', '#', ' ', ' ', },
-        { ' ', '#', ' ', ' ', ' ', ' ', },
-        { ' ', ' ', ' ', '#', ' ', ' ', },
-        { '#', '#', ' ', ' ', ' ', ' ', },
-        { ' ', ' ', ' ', ' ', '#', ' ', },
-    });
+                                                                                                 {' ', ' ', '#', ' ', ' ', '#',},
+                                                                                                 {'#', ' ', ' ', ' ', ' ', ' ',},
+                                                                                                 {'#', '#', ' ', ' ', '#', ' ',},
+                                                                                                 {' ', ' ', ' ', '#', ' ', ' ',},
+                                                                                                 {' ', '#', ' ', ' ', ' ', ' ',},
+                                                                                                 {' ', ' ', ' ', '#', ' ', ' ',},
+                                                                                                 {'#', '#', ' ', ' ', ' ', ' ',},
+                                                                                                 {' ', ' ', ' ', ' ', '#', ' ',},
+                                                                                         });
 
-    for (const auto& row : labyrinth) {
-        for (const auto& cell : row) {
+    for (const auto &row: labyrinth) {
+        for (const auto &cell: row) {
             if (cell == Wall) {
                 std::cout << "#";
-            }
-            else if (cell == Path) {
+            } else if (cell == Path) {
                 std::cout << "_";
             }
         }
@@ -152,7 +152,7 @@ void TriwizardTournament::test() {
     std::vector<Wizard> wizards{
             Wizard(1, {0, 0}, 1),
             Wizard(2, {0, 1}, 2),
-            Wizard(3, {7, 3}, 1),
+            Wizard(3, {5, 2}, 1),
     };
 
     for (const auto &wizard: wizards) {
@@ -162,7 +162,9 @@ void TriwizardTournament::test() {
 
     std::cout << std::endl;
 
-    int fastest_wizard_id = find_fastest_wizard(labyrinth, wizards);
+    int fastest_wizard_id;
+    float fastest_wizard_path;
+    std::tie(fastest_wizard_id, fastest_wizard_path) = find_fastest_wizard(labyrinth, wizards);
 
-    std::cout << "The fastest wizard is [" << fastest_wizard_id << "]" << std::endl;
+    std::cout << "The fastest wizard is [" << fastest_wizard_id << "] whose path is " << std::fixed << std::setprecision(2) << fastest_wizard_path << std::endl;
 }
