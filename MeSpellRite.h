@@ -7,6 +7,7 @@
 #include <vector>
 #include <random>
 #include <iostream>
+#include <set>
 
 const int dict_size = 10000;
 const int text_size = 1000;
@@ -96,11 +97,6 @@ private:
 
     Node *root = nullptr;
 
-public:
-    std::string getName() override {
-        return "Naive";
-    }
-
     void buildDictionary() {
         std::vector<std::string> english_words = TextBuilder::getListOfWords();
 
@@ -111,6 +107,11 @@ public:
             }
             *tmp = new Node(english_word);
         }
+    }
+
+public:
+    std::string getName() override {
+        return "Naive";
     }
 
     int spellCheck(std::string filename) override {
@@ -151,6 +152,48 @@ public:
     }
 };
 
+class BBSTSpellCheckingAlgorithm: public SpellCheckingAlgorithm
+{
+private:
+    static std::set<std::string, std::greater<>> buildDictionary()
+    {
+        std::vector<std::string> english_words = TextBuilder::getListOfWords();
+        std::set<std::string, std::greater<>> dictionary;
+
+        for (const auto &english_word: english_words) {
+            dictionary.insert(english_word);
+        }
+
+        return dictionary;
+    }
+
+public:
+    std::string getName() override
+    {
+        return "BBST";
+    }
+
+    int spellCheck(std::string filename) override
+    {
+        int wrongSpelledWords = 0;
+        std::set<std::string, std::greater<>> dictionary = buildDictionary();
+        std::vector<std::string> text_vector = textFileToVector(filename);
+
+        for (const auto &word: text_vector) {
+            if (dictionary.find(word) == dictionary.end())
+            {
+                ++wrongSpelledWords;
+            }
+        }
+
+        std::cout << getName() << ": " << wrongSpelledWords << std::endl;
+
+        return wrongSpelledWords;
+    }
+
+    ~BBSTSpellCheckingAlgorithm() override = default;
+};
+
 
 class MeSpellRite {
 public:
@@ -159,7 +202,7 @@ public:
 
         std::cout << "------ Me Spell Rite ------" << std::endl << std::endl;
 
-        std::vector<SpellCheckingAlgorithm *> spellCheckers = {new NaiveSpellCheckingAlgorithm()};
+        std::vector<SpellCheckingAlgorithm *> spellCheckers = {new NaiveSpellCheckingAlgorithm(), new BBSTSpellCheckingAlgorithm()};
         for (const auto &spellChecker: spellCheckers) {
             spellChecker->spellCheck(TextBuilder::get_output_file_name());
         }

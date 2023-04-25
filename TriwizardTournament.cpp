@@ -3,6 +3,8 @@
 #include <deque>
 #include <limits>
 #include <fstream>
+#include <unordered_map>
+#include <iomanip>
 
 
 std::tuple<int, float>
