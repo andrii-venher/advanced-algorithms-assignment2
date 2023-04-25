@@ -1,6 +1,8 @@
 #include "AuntsNamesday.h"
 #include <iostream>
 #include <stdexcept>
+#include <unordered_map>
+#include <algorithm>
 
 void dfs(const std::string &current_guest,
          std::unordered_map<std::string, std::vector<std::string>> &graph, std::unordered_map<std::string, int> &tables,
