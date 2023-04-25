@@ -13,7 +13,7 @@ protected:
         std::string _value;
         Node *_next;
     public:
-        Node(std::string key, std::string value, Node *next) : _key(std::move(key)), _value(value), _next(next) {}
+        Node(std::string key, std::string value, Node *next) : _key(std::move(key)), _value(std::move(value)), _next(next) {}
 
         std::string get_key() const { return _key; }
 
