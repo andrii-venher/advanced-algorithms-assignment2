@@ -1,6 +1,7 @@
+#include "TriwizardTournament.h"
 #include "AuntsNamesday.h"
 
 int main() {
-    AuntsNamesday::test();
+    TriwizardTournament::test();
     return 0;
 }

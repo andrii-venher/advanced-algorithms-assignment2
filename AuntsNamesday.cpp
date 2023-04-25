@@ -88,6 +88,8 @@ AuntsNamesday::arrange_guests(const std::vector<std::string> &guests, const std:
 }
 
 void AuntsNamesday::test() {
+    std::cout << "------ Aunt's Namesday ------" << std::endl << std::endl;
+
     std::vector<std::string> guests({"Alice", "Bob", "Charlie", "Dave", "Eve"});
     std::vector<std::tuple<std::string, std::string>> dislikes({
                                                                        {"Alice", "Charlie"},
