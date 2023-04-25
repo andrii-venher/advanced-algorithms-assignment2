@@ -6,7 +6,8 @@ set(CMAKE_CXX_STANDARD 14)
 add_executable(advanced_algorithms_assignment2
         main.cpp
         AuntsNamesday.cpp
-        TriwizardTournament.cpp)
+        TriwizardTournament.cpp
+        MeSpellRite.h)
 
 target_include_directories(advanced_algorithms_assignment2 PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR})
