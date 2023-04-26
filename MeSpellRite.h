@@ -1,6 +1,7 @@
 #ifndef ADVANCED_ALGORITHMS_ASSIGNMENT2_MESPELLRITE_H
 #define ADVANCED_ALGORITHMS_ASSIGNMENT2_MESPELLRITE_H
 
+#include "HashMap.h"
 #include <fstream>
 #include <string>
 #include <utility>
@@ -9,7 +10,7 @@
 #include <iostream>
 #include <set>
 
-const int dict_size = 1000;
+const int dict_size = 10000;
 const int text_size = 1000;
 
 class TextBuilder {
@@ -229,7 +230,7 @@ private:
         }
         delete node;
     }
-    
+
 public:
     std::string getName() override {
         return "Trie";
@@ -268,6 +269,45 @@ public:
     }
 };
 
+class HashMapSpellCheckingAlgorithm : public SpellCheckingAlgorithm {
+private:
+    LinearProbingHashMap hashMap = LinearProbingHashMap(dict_size + dict_size * 0.25);
+
+    void buildDictionary()
+    {
+        std::vector<std::string> english_words = TextBuilder::getListOfWords();
+
+        for (const auto &english_word: english_words) {
+            hashMap.put(english_word, english_word);
+        }
+    }
+
+public:
+    std::string getName() override {
+        return "Hash Map";
+    }
+
+    int spellCheck(std::string filename) override {
+        int wrongSpelledWords = 0;
+        buildDictionary();
+        std::vector<std::string> text_vector = textFileToVector(filename);
+
+        for (const auto & word: text_vector)
+        {
+            if (!hashMap.contains(word))
+            {
+                ++wrongSpelledWords;
+            }
+        }
+
+        std::cout << getName() << ": " << wrongSpelledWords << std::endl;
+
+        return wrongSpelledWords;
+    }
+
+    ~HashMapSpellCheckingAlgorithm() override = default;
+};
+
 
 class MeSpellRite {
 public:
@@ -278,7 +318,8 @@ public:
 
         std::vector<SpellCheckingAlgorithm *> spellCheckers = {new NaiveSpellCheckingAlgorithm(),
                                                                new BBSTSpellCheckingAlgorithm(),
-                                                               new TrieSpellCheckingAlgorithm()};
+                                                               new TrieSpellCheckingAlgorithm(),
+                                                               new HashMapSpellCheckingAlgorithm()};
         for (const auto &spellChecker: spellCheckers) {
             spellChecker->spellCheck(TextBuilder::get_output_file_name());
         }

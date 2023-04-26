@@ -11,6 +11,7 @@ protected:
     static int hash(const std::string &data, int bucket_size) {
         int index = 0;
         int factor = 31;
+        int q = 7993;
 
         for (const char &i: data) {
 
@@ -18,9 +19,7 @@ protected:
                      + (((int) i) * factor) % bucket_size)
                     % bucket_size;
 
-            factor = ((factor % std::numeric_limits<int>::max())
-                      * (31 % std::numeric_limits<int>::max()))
-                     % std::numeric_limits<int>::max();
+            factor = ((factor % q) * 31) % q;
         }
 
         return index;
@@ -81,9 +80,9 @@ public:
 };
 
 class LinearProbingHashMap : public HashMap {
-    std::pair<std::string, std::string>* _map;
+    std::pair<std::string, std::string> *_map;
 
-    int getIndex(const std::string& key) const;
+    int getIndex(const std::string &key) const;
 
 public:
     explicit LinearProbingHashMap(int bucket_size);
@@ -101,9 +100,9 @@ public:
 
 
 class DoubleHashingHashMap : public HashMap {
-    std::pair<std::string, std::string>* _map;
+    std::pair<std::string, std::string> *_map;
 
-    int getIndex(const std::string& key) const;
+    int getIndex(const std::string &key) const;
 
 public:
     explicit DoubleHashingHashMap(int bucket_size);

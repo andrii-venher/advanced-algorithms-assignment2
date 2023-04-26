@@ -13,10 +13,13 @@ int DoubleHashingHashMap::getIndex(const std::string& key) const{
         return index;
     } else {
         int next_index = (index + index) % _bucket_size;
+
         while (!_map[next_index].first.empty() && next_index != index) {
             if (_map[next_index].first == key) {
                 return next_index;
             }
+
+            next_index = (next_index + 1) % _bucket_size;
         }
     }
 
