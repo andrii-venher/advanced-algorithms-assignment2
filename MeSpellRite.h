@@ -10,7 +10,7 @@
 #include <iostream>
 #include <set>
 
-const int dict_size = 10000;
+const int dict_size = 100000;
 const int text_size = 1000;
 
 class TextBuilder {
@@ -192,7 +192,7 @@ public:
 class TrieSpellCheckingAlgorithm : public SpellCheckingAlgorithm {
 private:
     struct TrieNode {
-        struct TrieNode *children[26] = {};
+        struct TrieNode *children[27] = {};
         bool isEndOfWord = false;
 
         TrieNode() {
