@@ -9,13 +9,14 @@ add_executable(advanced_algorithms_assignment2
         common/SeparateChainingHashMap.cpp
         common/LinearProbingHashMap.cpp
         common/DoubleHashingHashMap.cpp
-        me_spell_rite/SpellCheckingAlgorithm.cpp
-        me_spell_rite/NaiveSpellCheckingAlgorithm.cpp
-        me_spell_rite/BBSTSpellCheckingAlgorithm.cpp
-        me_spell_rite/TrieSpellCheckingAlgorithm.cpp
-        me_spell_rite/HashMapSpellCheckingAlgorithm.cpp
-        AuntsNamesday.cpp
+        spell_checking/SpellCheckingAlgorithm.cpp
+        spell_checking/NaiveSpellCheckingAlgorithm.cpp
+        spell_checking/BBSTSpellCheckingAlgorithm.cpp
+        spell_checking/TrieSpellCheckingAlgorithm.cpp
+        spell_checking/HashMapSpellCheckingAlgorithm.cpp
+        MeSpellRite.cpp
         TriwizardTournament.cpp
+        AuntsNamesday.cpp
         FullHouse.cpp)
 
 target_include_directories(advanced_algorithms_assignment2 PRIVATE

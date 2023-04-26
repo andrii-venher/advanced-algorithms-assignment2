@@ -1,5 +1,4 @@
-
-#include "me_spell_rite/MeSpellRite.h"
+#include "MeSpellRite.h"
 #include "TriwizardTournament.h"
 #include "AuntsNamesday.h"
 #include "FullHouse.h"

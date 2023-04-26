@@ -2,7 +2,7 @@
 #define ADVANCED_ALGORITHMS_ASSIGNMENT2_FULLHOUSE_H
 
 #include "common/HashMap.h"
-#include "me_spell_rite/MeSpellRite.h"
+#include "MeSpellRite.h"
 #include <fstream>
 
 class FullHouse {
