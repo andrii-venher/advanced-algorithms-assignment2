@@ -1,7 +1,7 @@
 #ifndef ADVANCED_ALGORITHMS_ASSIGNMENT2_HASHMAPASSERTS_H
 #define ADVANCED_ALGORITHMS_ASSIGNMENT2_HASHMAPASSERTS_H
 
-#include "common/HashMap.h"
+#include "HashMap.h"
 #include <iostream>
 #include <vector>
 #include <cassert>

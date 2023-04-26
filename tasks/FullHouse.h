@@ -1,7 +1,7 @@
 #ifndef ADVANCED_ALGORITHMS_ASSIGNMENT2_FULLHOUSE_H
 #define ADVANCED_ALGORITHMS_ASSIGNMENT2_FULLHOUSE_H
 
-#include "common/HashMap.h"
+#include "hash_map/HashMap.h"
 #include "MeSpellRite.h"
 #include <fstream>
 

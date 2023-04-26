@@ -1,4 +1,4 @@
-#include "common/HashMap.h"
+#include "HashMap.h"
 #include <stdexcept>
 #include <utility>
 

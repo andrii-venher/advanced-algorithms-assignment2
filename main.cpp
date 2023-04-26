@@ -1,8 +1,9 @@
-#include "MeSpellRite.h"
-#include "TriwizardTournament.h"
-#include "AuntsNamesday.h"
-#include "FullHouse.h"
-#include "common/HashMapAsserts.h"
+#include "common/TextBuilder.h"
+#include "hash_map/HashMapAsserts.h"
+#include "tasks/MeSpellRite.h"
+#include "tasks/TriwizardTournament.h"
+#include "tasks/AuntsNamesday.h"
+#include "tasks/FullHouse.h"
 
 int main() {
     TextBuilder::init();
