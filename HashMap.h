@@ -101,7 +101,13 @@ public:
 
 
 class DoubleHashingHashMap : public HashMap {
+    std::pair<std::string, std::string>* _map;
+
+    int getIndex(const std::string& key) const;
+
 public:
+    explicit DoubleHashingHashMap(int bucket_size);
+
     bool contains(std::string key) const override;
 
     std::string get(std::string key) const override;
@@ -109,6 +115,8 @@ public:
     void put(std::string key, std::string value) override;
 
     void erase(std::string key) override;
+
+    ~DoubleHashingHashMap() override;
 };
 
 #endif //ADVANCED_ALGORITHMS_ASSIGNMENT2_HASHMAP_H

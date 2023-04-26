@@ -54,7 +54,8 @@ public:
         std::cout << "Hash map asserts started." << std::endl;
 
         std::vector<HashMap *> hash_maps{new SeparateChainingHashMap((int) get_bucket_size()),
-                                         new LinearProbingHashMap((int) get_bucket_size())};
+                                         new LinearProbingHashMap((int) get_bucket_size()),
+                                         new DoubleHashingHashMap((int) get_bucket_size())};
 
         for (const auto &hash_map: hash_maps) {
             run_one(hash_map);
