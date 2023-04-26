@@ -1,4 +1,4 @@
-#include "HashMap.h"
+#include "common/HashMap.h"
 #include <stdexcept>
 
 SeparateChainingHashMap::SeparateChainingHashMap(int bucket_size) : HashMap(bucket_size) {

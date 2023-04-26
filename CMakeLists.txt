@@ -5,11 +5,17 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(advanced_algorithms_assignment2
         main.cpp
+        common/TextBuilder.cpp
+        common/SeparateChainingHashMap.cpp
+        common/LinearProbingHashMap.cpp
+        common/DoubleHashingHashMap.cpp
+        me_spell_rite/SpellCheckingAlgorithm.cpp
+        me_spell_rite/NaiveSpellCheckingAlgorithm.cpp
+        me_spell_rite/BBSTSpellCheckingAlgorithm.cpp
+        me_spell_rite/TrieSpellCheckingAlgorithm.cpp
+        me_spell_rite/HashMapSpellCheckingAlgorithm.cpp
         AuntsNamesday.cpp
         TriwizardTournament.cpp
-        SeparateChainingHashMap.cpp
-        LinearProbingHashMap.cpp
-        DoubleHashingHashMap.cpp
         FullHouse.cpp)
 
 target_include_directories(advanced_algorithms_assignment2 PRIVATE

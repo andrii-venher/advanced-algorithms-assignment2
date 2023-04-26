@@ -1,17 +1,21 @@
+
+#include "me_spell_rite/MeSpellRite.h"
 #include "TriwizardTournament.h"
 #include "AuntsNamesday.h"
-#include "MeSpellRite.h"
-#include "HashMapAsserts.h"
 #include "FullHouse.h"
+#include "common/HashMapAsserts.h"
 
 int main() {
-//    MeSpellRite::test();
-//
-//    AuntsNamesday::test();
-//
-//    TriwizardTournament::test();
-//
-//    HashMapAsserts::run();
+    TextBuilder::init();
+    HashMapAsserts::run();
+
+    std::cout << std::endl;
+
+    MeSpellRite::test();
+
+    AuntsNamesday::test();
+
+    TriwizardTournament::test();
 
     FullHouse::measure();
 

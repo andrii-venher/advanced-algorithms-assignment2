@@ -1,14 +1,14 @@
 #ifndef ADVANCED_ALGORITHMS_ASSIGNMENT2_FULLHOUSE_H
 #define ADVANCED_ALGORITHMS_ASSIGNMENT2_FULLHOUSE_H
 
-#include "HashMap.h"
-#include "MeSpellRite.h"
+#include "common/HashMap.h"
+#include "me_spell_rite/MeSpellRite.h"
 #include <fstream>
 
 class FullHouse {
-    static void measure_one(HashMap *hash_map);
+    static int bucket_size;
 
-    static int get_bucket_size();
+    static void measure_one(HashMap *hash_map);
 
 public:
     static void measure();
