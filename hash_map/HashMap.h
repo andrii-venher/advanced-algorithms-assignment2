@@ -110,6 +110,16 @@ class DoubleHashingHashMap : public HashMap {
 
     int getIndex(const std::string &key) const;
 
+    static int doubleHash(const std::string &data, int bucket_size) {
+        int index = 0;
+
+        for (const char &i: data) {
+            index += (int) i;
+        }
+
+        return (index * bucket_size - 1) % bucket_size;
+    }
+
 public:
     explicit DoubleHashingHashMap(int bucket_size);
 

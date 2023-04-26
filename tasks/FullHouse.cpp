@@ -1,3 +1,4 @@
+#include <chrono>
 #include "FullHouse.h"
 
 int FullHouse::bucket_size = 100000;
@@ -27,7 +28,7 @@ void FullHouse::measure() {
     std::vector<HashMap *> hash_maps{
             new SeparateChainingHashMap(bucket_size),
             new LinearProbingHashMap(bucket_size),
-            //new DoubleHashingHashMap(bucket_size),
+            new DoubleHashingHashMap(bucket_size),
     };
 
     for (const auto &hash_map: hash_maps) {

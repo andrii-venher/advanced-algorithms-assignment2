@@ -12,14 +12,15 @@ int DoubleHashingHashMap::getIndex(const std::string &key) const {
     if (_map[index].first == key) {
         return index;
     } else {
-        int next_index = (index + index) % _bucket_size;
+        int step = doubleHash(key, _bucket_size);
+        int next_index = (index + step) % _bucket_size;
 
         while (!_map[next_index].first.empty() && next_index != index) {
             if (_map[next_index].first == key) {
                 return next_index;
             }
 
-            next_index = (next_index + 1) % _bucket_size;
+            next_index = (next_index + step) % _bucket_size;
         }
     }
 
@@ -47,21 +48,24 @@ std::string DoubleHashingHashMap::get(std::string key) const {
 }
 
 void DoubleHashingHashMap::put(std::string key, std::string value) {
-    if (contains(key)) {
-        throw std::out_of_range("Key already exists.");
-    }
-
     if (_size >= _bucket_size) {
         throw std::runtime_error("The hash map is full");
     }
 
+    if (contains(key)) {
+        throw std::out_of_range("Key already exists.");
+    }
+
     int index = hash(key, _bucket_size);
+
     if (_map[index].first.empty()) {
         _map[index] = std::pair<std::string, std::string>(key, value);
     } else {
-        int new_index = (index + index) % _bucket_size;
-        while (!_map[index].first.empty()) {
-            new_index = (new_index + 1) % _bucket_size;
+        int step = doubleHash(key, _bucket_size);;
+
+        int new_index = (index + step) % _bucket_size;
+        while (!_map[new_index].first.empty()) {
+            new_index = (new_index + step) % _bucket_size;
         }
         _map[new_index] = std::pair<std::string, std::string>(key, value);
     }
@@ -86,5 +90,5 @@ DoubleHashingHashMap::~DoubleHashingHashMap() {
 }
 
 std::string DoubleHashingHashMap::get_name() {
-    return "DoubleHashing";
+    return "DoubleHashingHashMap";
 }
