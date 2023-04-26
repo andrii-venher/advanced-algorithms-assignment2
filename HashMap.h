@@ -44,6 +44,8 @@ public:
     int size() const { return _size; }
 
     float load_factor() const { return _size / (float) _bucket_size; }
+
+    virtual std::string get_name() = 0;
 };
 
 class SeparateChainingHashMap : public HashMap {
@@ -77,6 +79,8 @@ public:
     void put(std::string key, std::string value) override;
 
     void erase(std::string key) override;
+
+    std::string get_name() override;
 };
 
 class LinearProbingHashMap : public HashMap {
@@ -87,6 +91,8 @@ class LinearProbingHashMap : public HashMap {
 public:
     explicit LinearProbingHashMap(int bucket_size);
 
+    ~LinearProbingHashMap() override;
+
     bool contains(std::string key) const override;
 
     std::string get(std::string key) const override;
@@ -95,7 +101,7 @@ public:
 
     void erase(std::string key) override;
 
-    ~LinearProbingHashMap() override;
+    std::string get_name() override;
 };
 
 
@@ -107,6 +113,8 @@ class DoubleHashingHashMap : public HashMap {
 public:
     explicit DoubleHashingHashMap(int bucket_size);
 
+    ~DoubleHashingHashMap() override;
+
     bool contains(std::string key) const override;
 
     std::string get(std::string key) const override;
@@ -115,7 +123,7 @@ public:
 
     void erase(std::string key) override;
 
-    ~DoubleHashingHashMap() override;
+    std::string get_name() override;
 };
 
 #endif //ADVANCED_ALGORITHMS_ASSIGNMENT2_HASHMAP_H

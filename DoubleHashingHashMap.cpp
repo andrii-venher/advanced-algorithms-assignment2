@@ -6,7 +6,7 @@ DoubleHashingHashMap::DoubleHashingHashMap(int bucket_size) : HashMap(bucket_siz
     _map = new std::pair<std::string, std::string>[_bucket_size];
 }
 
-int DoubleHashingHashMap::getIndex(const std::string& key) const{
+int DoubleHashingHashMap::getIndex(const std::string &key) const {
     int index = hash(key, _bucket_size);
 
     if (_map[index].first == key) {
@@ -39,8 +39,7 @@ bool DoubleHashingHashMap::contains(std::string key) const {
 std::string DoubleHashingHashMap::get(std::string key) const {
     int index = getIndex(key);
 
-    if (index == -1)
-    {
+    if (index == -1) {
         throw std::out_of_range("Key does not exist.");
     }
 
@@ -73,8 +72,7 @@ void DoubleHashingHashMap::put(std::string key, std::string value) {
 void DoubleHashingHashMap::erase(std::string key) {
     int index = getIndex(key);
 
-    if (index == -1)
-    {
+    if (index == -1) {
         throw std::out_of_range("Key does not exist.");
     }
 
@@ -85,4 +83,8 @@ void DoubleHashingHashMap::erase(std::string key) {
 
 DoubleHashingHashMap::~DoubleHashingHashMap() {
     delete[] _map;
+}
+
+std::string DoubleHashingHashMap::get_name() {
+    return "DoubleHashing";
 }

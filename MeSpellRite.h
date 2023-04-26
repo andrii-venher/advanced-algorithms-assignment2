@@ -10,12 +10,12 @@
 #include <iostream>
 #include <set>
 
-const int dict_size = 10000;
-const int text_size = 1000;
+const int DEFAULT_DICT_SIZE = 10000;
+const int DEFAULT_TEXT_SIZE = 1000;
 
 class TextBuilder {
 public:
-    static std::vector<std::string> getListOfWords() {
+    static std::vector<std::string> getListOfWords(int dict_size) {
         std::string tmp;
         std::ifstream file_in;
         std::vector<std::string> english_words;
@@ -31,8 +31,8 @@ public:
         return english_words;
     }
 
-    static void buildText() {
-        std::vector<std::string> english_words = getListOfWords();
+    static void buildText(int dict_size, int text_size) {
+        std::vector<std::string> english_words = getListOfWords(dict_size);
 
         std::random_device dev;
         std::mt19937 rng(dev());
@@ -98,7 +98,7 @@ private:
     Node *root = nullptr;
 
     void buildDictionary() {
-        std::vector<std::string> english_words = TextBuilder::getListOfWords();
+        std::vector<std::string> english_words = TextBuilder::getListOfWords(DEFAULT_DICT_SIZE);
 
         for (const auto &english_word: english_words) {
             Node **tmp = &root;
@@ -155,7 +155,7 @@ public:
 class BBSTSpellCheckingAlgorithm : public SpellCheckingAlgorithm {
 private:
     static std::set<std::string, std::greater<>> buildDictionary() {
-        std::vector<std::string> english_words = TextBuilder::getListOfWords();
+        std::vector<std::string> english_words = TextBuilder::getListOfWords(DEFAULT_DICT_SIZE);
         std::set<std::string, std::greater<>> dictionary;
 
         for (const auto &english_word: english_words) {
@@ -205,7 +205,7 @@ private:
     TrieNode *root = new TrieNode();
 
     void buildDictionary() {
-        std::vector<std::string> english_words = TextBuilder::getListOfWords();
+        std::vector<std::string> english_words = TextBuilder::getListOfWords(DEFAULT_DICT_SIZE);
 
         for (const auto &english_word: english_words) {
             TrieNode *tmp = root;
@@ -271,11 +271,11 @@ public:
 
 class HashMapSpellCheckingAlgorithm : public SpellCheckingAlgorithm {
 private:
-    LinearProbingHashMap hashMap = LinearProbingHashMap(dict_size + dict_size * 0.25);
+    LinearProbingHashMap hashMap = LinearProbingHashMap(DEFAULT_DICT_SIZE + DEFAULT_TEXT_SIZE * 0.25);
 
     void buildDictionary()
     {
-        std::vector<std::string> english_words = TextBuilder::getListOfWords();
+        std::vector<std::string> english_words = TextBuilder::getListOfWords(DEFAULT_DICT_SIZE);
 
         for (const auto &english_word: english_words) {
             hashMap.put(english_word, english_word);
@@ -312,7 +312,7 @@ public:
 class MeSpellRite {
 public:
     static void test() {
-        TextBuilder::buildText();
+        TextBuilder::buildText(DEFAULT_DICT_SIZE, DEFAULT_TEXT_SIZE);
 
         std::cout << "------ Me Spell Rite ------" << std::endl << std::endl;
 

@@ -84,3 +84,7 @@ void SeparateChainingHashMap::erase(std::string key) {
     }
     throw std::out_of_range("Key does not exist.");
 }
+
+std::string SeparateChainingHashMap::get_name() {
+    return "SeparateChaining";
+}

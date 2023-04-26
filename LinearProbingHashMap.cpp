@@ -6,7 +6,7 @@ LinearProbingHashMap::LinearProbingHashMap(int bucket_size) : HashMap(bucket_siz
     _map = new std::pair<std::string, std::string>[_bucket_size];
 }
 
-int LinearProbingHashMap::getIndex(const std::string& key) const {
+int LinearProbingHashMap::getIndex(const std::string &key) const {
     int index = hash(key, _bucket_size);
 
     if (_map[index].first == key) {
@@ -39,8 +39,7 @@ bool LinearProbingHashMap::contains(std::string key) const {
 std::string LinearProbingHashMap::get(std::string key) const {
     int index = getIndex(key);
 
-    if (index == -1)
-    {
+    if (index == -1) {
         throw std::out_of_range("Key does not exist.");
     }
 
@@ -74,8 +73,7 @@ void LinearProbingHashMap::put(std::string key, std::string value) {
 void LinearProbingHashMap::erase(std::string key) {
     int index = getIndex(key);
 
-    if (index == -1)
-    {
+    if (index == -1) {
         throw std::out_of_range("Key does not exist.");
     }
 
@@ -86,4 +84,8 @@ void LinearProbingHashMap::erase(std::string key) {
 
 LinearProbingHashMap::~LinearProbingHashMap() {
     delete[] _map;
+}
+
+std::string LinearProbingHashMap::get_name() {
+    return "LinearProbing";
 }
