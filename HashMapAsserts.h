@@ -3,6 +3,8 @@
 
 #include "HashMap.h"
 #include <iostream>
+#include <vector>
+#include <cassert>
 
 class HashMapAsserts {
     static float get_bucket_size() { return 100; }
@@ -51,7 +53,8 @@ public:
     static void run() {
         std::cout << "Hash map asserts started." << std::endl;
 
-        std::vector<HashMap *> hash_maps{new SeparateChainingHashMap((int) get_bucket_size())};
+        std::vector<HashMap *> hash_maps{new SeparateChainingHashMap((int) get_bucket_size()),
+                                         new LinearProbingHashMap((int) get_bucket_size())};
 
         for (const auto &hash_map: hash_maps) {
             run_one(hash_map);
