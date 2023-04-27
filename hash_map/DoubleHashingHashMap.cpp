@@ -90,5 +90,5 @@ DoubleHashingHashMap::~DoubleHashingHashMap() {
 }
 
 std::string DoubleHashingHashMap::get_name() {
-    return "DoubleHashingHashMap";
+    return "DoubleHashing";
 }
