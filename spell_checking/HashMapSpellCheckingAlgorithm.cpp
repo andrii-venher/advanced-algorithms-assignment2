@@ -11,7 +11,7 @@ void HashMapSpellCheckingAlgorithm::buildDictionary() {
 }
 
 HashMapSpellCheckingAlgorithm::HashMapSpellCheckingAlgorithm(int dict_size) : SpellCheckingAlgorithm(dict_size) {
-    _hashMap = new LinearProbingHashMap(_dict_size + _dict_size * 0.25);
+    _hashMap = new DoubleHashingHashMap(_dict_size + _dict_size * 0.25);
 }
 
 HashMapSpellCheckingAlgorithm::~HashMapSpellCheckingAlgorithm() {
@@ -29,8 +29,6 @@ int HashMapSpellCheckingAlgorithm::spellCheck(std::string filename) {
             ++wrongSpelledWords;
         }
     }
-
-    std::cout << getName() << ": " << wrongSpelledWords << std::endl;
 
     return wrongSpelledWords;
 }

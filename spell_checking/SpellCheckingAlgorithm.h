@@ -16,7 +16,7 @@ protected:
 
     int _dict_size;
 public:
-    SpellCheckingAlgorithm(int dict_size);
+    explicit SpellCheckingAlgorithm(int dict_size);
 
     virtual ~SpellCheckingAlgorithm() = default;
 
@@ -43,7 +43,7 @@ private:
     void buildDictionary();
 
 public:
-    NaiveSpellCheckingAlgorithm(int dict_size);
+    explicit NaiveSpellCheckingAlgorithm(int dict_size);
 
     std::string getName() override;
 
@@ -57,7 +57,7 @@ private:
     std::set<std::string, std::greater<>> buildDictionary();
 
 public:
-    BBSTSpellCheckingAlgorithm(int dict_size);
+    explicit BBSTSpellCheckingAlgorithm(int dict_size);
 
     ~BBSTSpellCheckingAlgorithm() override = default;
 
@@ -86,7 +86,7 @@ private:
     void clear(TrieNode *node);
 
 public:
-    TrieSpellCheckingAlgorithm(int dict_size);
+    explicit TrieSpellCheckingAlgorithm(int dict_size);
 
     ~TrieSpellCheckingAlgorithm() override;
 
@@ -102,7 +102,7 @@ private:
     void buildDictionary();
 
 public:
-    HashMapSpellCheckingAlgorithm(int dict_size);
+    explicit HashMapSpellCheckingAlgorithm(int dict_size);
 
     ~HashMapSpellCheckingAlgorithm() override;
 
