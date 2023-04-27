@@ -1,7 +1,7 @@
 #include <chrono>
 #include "FullHouse.h"
 
-int FullHouse::bucket_size = 100000;
+int FullHouse::bucket_size = 1000;
 
 void FullHouse::measure_one(HashMap *hash_map) {
     using clock = std::chrono::steady_clock;

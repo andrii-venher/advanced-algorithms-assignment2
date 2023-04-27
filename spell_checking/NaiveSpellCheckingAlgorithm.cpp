@@ -49,7 +49,6 @@ int NaiveSpellCheckingAlgorithm::spellCheck(std::string filename) {
             ++wrongSpelledWords;
         }
     }
-    std::cout << getName() << ": " << wrongSpelledWords << std::endl;
 
     return wrongSpelledWords;
 }

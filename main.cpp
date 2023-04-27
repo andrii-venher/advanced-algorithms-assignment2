@@ -11,7 +11,7 @@ int main() {
 
     std::cout << std::endl;
 
-    MeSpellRite::test();
+    MeSpellRite::measure();
 
     AuntsNamesday::test();
 

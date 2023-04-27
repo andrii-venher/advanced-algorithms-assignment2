@@ -61,8 +61,6 @@ int TrieSpellCheckingAlgorithm::spellCheck(std::string filename) {
         }
     }
 
-    std::cout << getName() << ": " << wrongSpelledWords << std::endl;
-
     return wrongSpelledWords;
 }
 
