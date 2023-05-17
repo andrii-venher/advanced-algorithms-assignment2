@@ -28,7 +28,7 @@ void MeSpellRite::test() {
 
 void MeSpellRite::measure_one(const std::string& spellCheckerName)
 {
-    int step = 100;
+    int step = 1000;
     int maxSize = 10000;
     int max_times = 10;
 

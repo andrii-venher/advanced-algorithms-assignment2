@@ -69,7 +69,7 @@ public:
 class TrieSpellCheckingAlgorithm : public SpellCheckingAlgorithm {
 private:
     struct TrieNode {
-        struct TrieNode *children[27] = {};
+        struct TrieNode *children['z' - 'a' + 2] = {};
         bool isEndOfWord = false;
 
         TrieNode() {

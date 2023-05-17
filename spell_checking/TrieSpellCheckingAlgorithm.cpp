@@ -10,6 +10,10 @@ void TrieSpellCheckingAlgorithm::buildDictionary() {
 
         for (char character: english_word) {
             int index = character - 'a';
+            if (index < 0)
+            {
+                index = 'z' - 'a' + 1;
+            }
             if (!tmp->children[index])
                 tmp->children[index] = new TrieNode();
 
